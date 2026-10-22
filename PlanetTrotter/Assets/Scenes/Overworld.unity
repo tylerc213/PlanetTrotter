@@ -237,7 +237,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::OxygenUI
   oxygenSystem: {fileID: 1418437890}
   oxygenFill: {fileID: 759177332}
+<<<<<<< HEAD
   fullWidth: 0
+=======
+>>>>>>> 1cfe97e0cdbd2046e6dbf8f83040fde29f316914
 --- !u!1 &187043896
 GameObject:
   m_ObjectHideFlags: 0
@@ -1155,7 +1158,10 @@ GameObject:
   - component: {fileID: 918050741}
   - component: {fileID: 918050744}
   - component: {fileID: 918050745}
+<<<<<<< HEAD
   - component: {fileID: 918050746}
+=======
+>>>>>>> 1cfe97e0cdbd2046e6dbf8f83040fde29f316914
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1296,6 +1302,7 @@ MonoBehaviour:
   target: {fileID: 1418437888}
   followSpeed: 8
   cameraHeight: 15
+<<<<<<< HEAD
 --- !u!114 &918050746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1308,6 +1315,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f79dabf40eaa273488cfc0a7288eafb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OverworldManager
+=======
+>>>>>>> 1cfe97e0cdbd2046e6dbf8f83040fde29f316914
 --- !u!1 &1418437883
 GameObject:
   m_ObjectHideFlags: 0
@@ -1465,8 +1474,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   movespeed: 5
+<<<<<<< HEAD
   rb: {fileID: 0}
   movement: {x: 0, y: 0, z: 0}
+=======
+>>>>>>> 1cfe97e0cdbd2046e6dbf8f83040fde29f316914
 --- !u!114 &1418437890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1486,7 +1498,10 @@ MonoBehaviour:
   refillRate: 20
   isInBase: 0
   baseRespawnPosition: {x: 15, y: 1, z: 0}
+<<<<<<< HEAD
   rb: {fileID: 0}
+=======
+>>>>>>> 1cfe97e0cdbd2046e6dbf8f83040fde29f316914
 --- !u!1 &1486555172
 GameObject:
   m_ObjectHideFlags: 0
