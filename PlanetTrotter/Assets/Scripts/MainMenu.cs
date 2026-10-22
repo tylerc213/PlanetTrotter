@@ -18,7 +18,7 @@ public class MainMenu : MonoBehaviour
     public void NewGame()
     {
         Debug.Log("New Game.");
-        SceneManager.LoadScene("TestHub");
+        SceneManager.LoadScene("Overworld");
     }
 
     public void LoadGame()
