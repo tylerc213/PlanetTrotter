@@ -83,6 +83,7 @@ public class PlayerStateManager : MonoBehaviour
             rb.angularVelocity = Vector3.zero;
         }
 
-        Debug.Log("Restored");
+        //Debug.Log("Restored");
+        Debug.LogWarning("PlayerStateManager restored player to: " + savedPosition);
     }
 }
