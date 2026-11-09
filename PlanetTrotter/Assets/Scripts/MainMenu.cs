@@ -3,20 +3,11 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    //void Start()
-    //{
-        
-    //}
-
-    // Update is called once per frame
-    //void Update()
-    //{
-        
-    //}
+   
 
     public void NewGame()
     {
+        Time.timeScale = 1f;
         Debug.Log("New Game.");
         SceneManager.LoadScene("Overworld");
     }
@@ -24,6 +15,7 @@ public class MainMenu : MonoBehaviour
     public void LoadGame()
     { 
         Debug.Log("Load Game.");
+        SceneManager.LoadScene("SaveFileScene");
     }
 
     public void ExitGame()
@@ -34,5 +26,11 @@ public class MainMenu : MonoBehaviour
         #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
         #endif
+    }
+
+    public void BackToMainMenu()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("StartUpMenu");
     }
 }
