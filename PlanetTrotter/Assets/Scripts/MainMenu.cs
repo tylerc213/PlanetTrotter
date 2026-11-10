@@ -9,6 +9,9 @@ public class MainMenu : MonoBehaviour
     {
         Time.timeScale = 1f;
         Debug.Log("New Game.");
+
+        PlayerStateManager.Instance.PrepareForNewGame();
+
         SceneManager.LoadScene("Overworld");
     }
 
@@ -30,6 +33,13 @@ public class MainMenu : MonoBehaviour
 
     public void BackToMainMenu()
     {
+        ResourceSpawner resourceSpawner = FindAnyObjectByType<ResourceSpawner>();
+
+        if (resourceSpawner != null)
+        {
+            resourceSpawner.ClearGeneratedResources();
+        }
+
         Time.timeScale = 1f;
         SceneManager.LoadScene("StartUpMenu");
     }
