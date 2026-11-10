@@ -16,6 +16,9 @@ public class InventoryManager : MonoBehaviour
         if(Keyboard.current.escapeKey.wasPressedThisFrame)
         {
             Debug.Log("The escape key was pressed.");
+
+            PlayerStateManager.Instance.PrepareForOverworldReturn();
+
             SceneManager.LoadScene(sceneName:"Overworld");
         }
     }

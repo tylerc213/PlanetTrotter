@@ -1699,6 +1699,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2100744468}
   - component: {fileID: 2100744467}
+  - component: {fileID: 2100744469}
+  - component: {fileID: 2100744470}
+  - component: {fileID: 2100744471}
   m_Layer: 0
   m_Name: GameSystems
   m_TagString: Untagged
@@ -1723,6 +1726,7 @@ MonoBehaviour:
   savedOxygen: 0
   savedIsInBase: 0
   hasSavedState: 0
+  restoreAfterSceneChange: 0
 --- !u!4 &2100744468
 Transform:
   m_ObjectHideFlags: 0
@@ -1738,6 +1742,64 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2100744469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100744466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1d2ab9da573a3b4e8939ca8a789e152, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ResourceSpawner
+  resource1Prefab: {fileID: 3098867457801516974, guid: 7e4b219ea02d2cd4eaf1357ace9a2f49, type: 3}
+  resource2Prefab: {fileID: 3931936845849719116, guid: 9d25fdcf6eb421a448182fbc6d2afe45, type: 3}
+  icePrefab: {fileID: 565675468756093712, guid: 7dcb48f5a3a2c7341b940efcb493cb9a, type: 3}
+  resource1Count: 15
+  resource2Count: 10
+  iceCount: 20
+  resource1MinRadius: 10
+  resource1MaxRadius: 45
+  resource2MinRadius: 50
+  resource2MaxRadius: 90
+  mapHalfSize: 100
+  edgePadding: 3
+  basePosition: {x: 15, y: 0, z: 0}
+  baseExclusionHalfWidth: 9
+  minimumResourceDistance: 3
+--- !u!114 &2100744470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100744466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a44433af4165f84b80232c5bff0bee1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WorldEnvironment
+  atmosphericOxygen: 0
+  currentTemperature: -20
+  daytimeTemperature: -20
+  nighttimeTemperature: -60
+--- !u!114 &2100744471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100744466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2d8114fdaf5ffd41977e50416ce237d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DayNightCycle
+  cycleDurationMinutes: 24
+  timeOfDay: 12
+  isDayTime: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

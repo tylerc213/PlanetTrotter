@@ -14,7 +14,14 @@ public class PlayerStateManager : MonoBehaviour
     public float savedOxygen;
     public bool savedIsInBase;
 
+    public float savedHealth;
+    public float savedSuitIntegrity;
+    public float savedTimeOfDay;
+
     public bool hasSavedState = false;
+
+    public bool restoreAfterSceneChange = false;
+    private bool pendingNewGame = false;
 
     private SaveData pendingLoad;
 
@@ -77,6 +84,25 @@ public class PlayerStateManager : MonoBehaviour
         savedOxygen = oxygen.currentOxygen;
         savedIsInBase = oxygen.isInBase;
 
+        HealthSystem health = FindAnyObjectByType<HealthSystem>();
+        SuitIntegrity integrity = FindAnyObjectByType<SuitIntegrity>();
+        DayNightCycle dayNight = FindAnyObjectByType<DayNightCycle>();
+
+        if (health != null)
+        {
+            savedHealth = health.currentHealth;
+        }
+
+        if (integrity != null)
+        {
+            savedSuitIntegrity = integrity.currentIntegrity;
+        }
+
+        if (dayNight != null)
+        {
+            savedTimeOfDay = dayNight.timeOfDay;
+        }
+
         hasSavedState = true;
 
         Debug.Log("Saved");
@@ -123,6 +149,26 @@ public class PlayerStateManager : MonoBehaviour
 
         oxygen.currentOxygen = savedOxygen;
         oxygen.isInBase = savedIsInBase;
+
+        HealthSystem health = FindAnyObjectByType<HealthSystem>();
+        SuitIntegrity integrity = FindAnyObjectByType<SuitIntegrity>();
+        DayNightCycle dayNight = FindAnyObjectByType<DayNightCycle>();
+
+        if (health != null)
+        {
+            health.currentHealth = savedHealth;
+        }
+
+        if (integrity != null)
+        {
+            integrity.currentIntegrity = savedSuitIntegrity;
+        }
+
+        if (dayNight != null)
+        {
+            dayNight.timeOfDay = savedTimeOfDay;
+        }
+
         Debug.Log("Restored");
         //Debug.LogWarning("PlayerStateManager restored player to: " + savedPosition);
     }
@@ -146,6 +192,21 @@ public class PlayerStateManager : MonoBehaviour
         data.oxygen = savedOxygen;
         data.isInBase = savedIsInBase;
 
+        data.health = savedHealth;
+        data.suitIntegrity = savedSuitIntegrity;
+        data.timeOfDay = savedTimeOfDay;
+
+        ResourceSpawner resourceSpawner = FindAnyObjectByType<ResourceSpawner>();
+
+        if (resourceSpawner != null)
+        {
+            data.resources = resourceSpawner.GetRemainingResources();
+        }
+        else
+        {
+            return false;
+        }
+
         return SaveFileSystem.Save(slot, data);
     }
 
@@ -166,11 +227,17 @@ public class PlayerStateManager : MonoBehaviour
         }
 
         pendingLoad = data;
+        restoreAfterSceneChange = false;
 
         Time.timeScale = 0f;
         SceneManager.LoadScene(data.sceneName);
 
         return true;
+    }
+
+    public void PrepareForOverworldReturn()
+    {
+        restoreAfterSceneChange = true;
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -179,21 +246,67 @@ public class PlayerStateManager : MonoBehaviour
         {
             StartCoroutine(RestoreAfterSceneStart());
         }
+
+        else if (pendingNewGame && scene.name == "Overworld")
+        {
+            ResourceSpawner resourceSpawner = FindAnyObjectByType<ResourceSpawner>();
+
+            if (resourceSpawner != null)
+            {
+                resourceSpawner.GenerateNewResources();
+            }
+
+            pendingNewGame = false;
+
+        }
+
+        else if (restoreAfterSceneChange && scene.name == "Overworld")
+        {
+            StartCoroutine(RestoreTemporaryPlayerState());
+        }
+    }
+
+    public void PrepareForNewGame()
+    {
+        pendingNewGame = true;
+        pendingLoad = null;
+        restoreAfterSceneChange = false;
+        hasSavedState = false;
     }
 
     private IEnumerator RestoreAfterSceneStart()
     {
         yield return null;
+
         savedPosition = pendingLoad.playerPosition;
         savedRotation = pendingLoad.playerRotation;
         savedOxygen = pendingLoad.oxygen;
         savedIsInBase = pendingLoad.isInBase;
 
+        savedHealth = pendingLoad.health;
+        savedSuitIntegrity = pendingLoad.suitIntegrity;
+        savedTimeOfDay = pendingLoad.timeOfDay;
+
         hasSavedState = true;
 
         RestorePlayerState();
 
+        ResourceSpawner resourceSpawner = FindAnyObjectByType<ResourceSpawner>();
+
+        if (resourceSpawner != null)
+        {
+            resourceSpawner.RestoreResources(pendingLoad.resources);
+        }
+
         pendingLoad = null;
         Time.timeScale = 1f;
+    }
+
+    private IEnumerator RestoreTemporaryPlayerState()
+    {
+        yield return null;
+
+        RestorePlayerState();
+        restoreAfterSceneChange = false;
     }
 }

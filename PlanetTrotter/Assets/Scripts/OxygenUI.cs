@@ -39,6 +39,6 @@ public class OxygenUI : MonoBehaviour
 
         oxygenFill.sizeDelta = new Vector2(fullWidth * percentage, oxygenFill.sizeDelta.y);
 
-        Debug.Log("Oxygen: " + oxygenSystem.currentOxygen);
+        // Debug.Log("Oxygen: " + oxygenSystem.currentOxygen);
     }
 }

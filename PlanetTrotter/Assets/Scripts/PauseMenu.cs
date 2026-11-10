@@ -72,6 +72,13 @@ public class PauseMenu : MonoBehaviour
 
     public void QuitToMainMenu()
     {
+        ResourceSpawner resourceSpawner = FindAnyObjectByType<ResourceSpawner>();
+
+        if (resourceSpawner != null)
+        {
+            resourceSpawner.ClearGeneratedResources();
+        }
+
         Time.timeScale = 1f;
         SceneManager.LoadScene("StartUpMenu");
     }

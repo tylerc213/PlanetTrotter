@@ -44,26 +44,5 @@ public class OxygenSystem : MonoBehaviour
         }
 
         currentOxygen = Mathf.Clamp(currentOxygen, 0f, maxOxygen);
-
-        if (currentOxygen <= 0f)
-        {
-            Respawn();
-        }
-    }
-
-    void Respawn()
-    {
-        Debug.Log("Oxygen Depleted, Respawning at Base");
-
-        transform.position = baseRespawnPosition;
-
-        if (rb != null)
-        {
-            rb.linearVelocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
-        }
-
-        currentOxygen = maxOxygen;
-        isInBase = true;
     }
 }

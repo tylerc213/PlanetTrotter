@@ -16,6 +16,9 @@ public class OverworldManager : MonoBehaviour
         if(Keyboard.current.iKey.wasPressedThisFrame)
         {
             Debug.Log("Transition to inventory");
+
+            PlayerStateManager.Instance.SavePlayerState();
+
             SceneManager.LoadScene(sceneName:"Inventory");
         }
     }
